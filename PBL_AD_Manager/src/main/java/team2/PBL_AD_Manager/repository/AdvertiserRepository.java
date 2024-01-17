@@ -4,19 +4,19 @@ import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
-import team2.PBL_AD_Manager.domain.User;
+import team2.PBL_AD_Manager.domain.Advertiser;
 
 @Repository
 @RequiredArgsConstructor
-public class UserRepository {
+
+public class AdvertiserRepository {
 	private final EntityManager em;
 
-	public void save(User user) {
-		em.persist(user);
+	public void saveAdvertiser(Advertiser advertiser) {
+		em.persist(advertiser);
 	}
 
-	public User fincOne(Long id) {
-		return em.find(User.class, id);
+	public Advertiser findAdvertiser(Long id) {
+		return em.find(Advertiser.class, id);
 	}
-
 }

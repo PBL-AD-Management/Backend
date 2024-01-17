@@ -1,3 +1,132 @@
-<html>
-<div>hello world</div>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team 7</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+
+    <script src="/script/script.js"></script>
+</head>
+
+<body>
+<div id="popupContainer" class="popup-container"></div>
+<!-- 레이어 팝업 ADD-->
+    <div id ="popupADD" class="popup"  >
+        <div>회사명: <input id="addCompanyName" /></div>
+        <div>광고제목: <input id="addADName" /></div>
+        <div>광고조건: <input id="addADCondition" /></div>
+        <div>슬롯위치: <input id="addSlot"/></div>
+        <div>비용: <input id="addCost" /></div>
+        <div>시작일: <input id="addDayStart" /></div>
+        <div>만료일: <input id="addDayEnd" /></div>
+        <div class="buttonBox">
+            <div><button id="closePopup" type="button" onclick="closePopup('popupADD')">닫기</button>
+            </div>
+                <form method="Post" action="/test">
+                    <button id="confirmAdd" type="submit" onclick="confirmAdd()">확인</button>
+            </form>
+        </div>
+    </div>
+<!--레이어팝업 상세-->
+<div id ="popupDetail" class="popup">
+    <div>상세 페이지</div>
+    <div>회사명: </div>
+    <div>광고제목: </div>
+    <div>광고조건: </div>
+    <div>슬롯위치: </div>
+    <div>비용: </div>
+    <div>시작일: </div>
+    <div>만료일: </div>
+    <button id="closePopupDetail" type="button" onclick="closePopup('popupDetail')">닫기</button>
+</div>
+
+<!--레이어팝업 수정-->
+<div id ="popupModify" class="popup">
+    <div>상세 페이지</div>
+    <div>회사명: </div>
+    <div>광고제목: </div>
+    <div>광고조건: </div>
+    <div>슬롯위치: </div>
+    <div>비용: </div>
+    <div>시작일: </div>
+    <div>만료일: </div>
+    <button id="cancelPopupModify" type="button" onclick="closePopup('popupModify')">취소</button>
+    <button id="closePopupModify" type="button" onclick="closePopup('popupModify')">닫기</button>
+</div>
+<!--레이어팝업 삭제-->
+<div id ="popupDelete" class="popup">
+    <div>삭제하시겠습니까? </div>
+    <button id="cancelPopupDelete" type="button" onclick="closePopup('popupDelete')">취소</button>
+    <button id="closePopupDelete" type="button" onclick="closePopup('popupDelete')">닫기</button>
+</div>
+<!--레이어 팝업 ADTest-->
+<div id ="popupAdTest" class="popup">
+    <div id="popupAdTestBox">
+    <div id="popupAdTestTargetBox">
+        <div>Target</div>
+        <input id="testAdUserId" type="text" value="여기에 쓰세요" />
+        <button id="submitUserId" type="button" onclick="submitUI()">제출</button>
+    </div>
+    <div>
+        <div>Result</div>
+        <div id ="ADTestResultBox"></div>
+        <div>
+            <button type="button">Web View</button>
+            <button type="button" onclick="closePopup('popupAdTest')">닫기</button>
+
+            <button type="button">확인</button>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- 제목 -->
+<h2 class=mainTitle>AD Manager Platform - AD List</h2>
+<div class=levelBox>
+    <div class="buttonLevel">
+        <button id=ADDButton type="button" onclick="openPopup('popupADD')">ADD</button>
+        <span></span>
+        <button id=ADTestButton type="button" onclick="openPopup('popupAdTest')">AD Test</button>
+    </div>
+    <div class="searchLevel">
+        <select id="searchSelect">
+            <option>title</option>
+            <option>text</option>
+        </select>
+        <input id="searchInput" type="text" value="여기에 쓰세요" />
+        <button type="button">검색</button>
+    </div>
+    <!-- 테이블 -->
+    <div class="tableLevel">
+        <table id="ADTable">
+            <thead>
+            <tr>
+                <td>idx</td>
+                <td>title</td>
+                <td>text</td>
+                <td>Exposure datetime</td>
+                <td>count</td>
+                <td>regdate</td>
+                <td>action</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="tableRow" th:each="ad : ${ads}">
+                <td id="idx" th:text="${ad.id}"></td>
+                <td id="title" ></td>
+                <td id="text" th:text="${ad.topText}"></td>
+                <td id="EDT"></td>
+                <td id="count" th:text="${ad.price}"></td>
+                <td id="regdate"></td>
+                <td id="action2">
+                    <button type="button" onclick="openPopup('popupDetail')">상세</button>
+                    <button type="button" onclick="openPopup('popupModify')">수정</button>
+                    <button type="button" onclick="openPopup('popupDelete')">삭제</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
 </html>
