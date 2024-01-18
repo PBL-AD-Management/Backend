@@ -9,4 +9,13 @@ import lombok.Setter;
 @Setter
 public class Video extends Ad {
 	private Long playTime;
+
+	public static Video createVideo(String url, int price, String text) {
+		Video VideoAd = new Video();
+		VideoAd.setUrl(url);
+		VideoAd.setPrice(price);
+		VideoAd.setText(text);
+
+		return VideoAd;
+	}
 }

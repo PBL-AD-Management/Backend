@@ -36,12 +36,11 @@ public class AdController {
 	@GetMapping("setAd")
 	public String setAdApi() {
 		Image image = new Image();
-		image.setBottomText("BottomText 입니다");
+		image.setText("BottomText 입니다");
 		image.setSize(1L);
 		image.setHeight(1L);
 		image.setClickCount(100);
 		image.setUrl("http://localhost3000");
-		image.setTopText("TopText 입니다");
 
 		adService.saveAd(image);
 

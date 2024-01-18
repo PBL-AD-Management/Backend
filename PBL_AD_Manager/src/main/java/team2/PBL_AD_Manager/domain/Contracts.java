@@ -1,7 +1,5 @@
 package team2.PBL_AD_Manager.domain;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -30,9 +28,9 @@ public class Contracts {
 
 	private int price;
 
-	private LocalDateTime startDate;
+	private String startDate;
 
-	private LocalDateTime endDate;
+	private String endDate;
 
 	@Enumerated(EnumType.STRING)
 	private SlotPosition slotPosition;
@@ -41,8 +39,7 @@ public class Contracts {
 	@JoinColumn(name = "ad_id")
 	private Ad ad;
 
-	@OneToOne
-	private TargetInf targetInf;
+	private Long targetId;
 
 	public void setAd(Ad ad) {
 		this.ad = ad;
@@ -54,14 +51,19 @@ public class Contracts {
 		advertiser.getContracts().add(this);
 	}
 
-	public static Contracts createContracts(int price, SlotPosition slotPosition, Ad ad, TargetInf targetInf,
-		Advertiser advertiser) {
+	public static Contracts createContracts(int price, SlotPosition slotPosition, Ad ad, Long targetId,
+		Advertiser advertiser, String startDate, String endDate) {
 		Contracts contracts = new Contracts();
 		contracts.setPrice(price);
 		contracts.setSlotPosition(slotPosition);
-		contracts.setTargetInf(targetInf);
+		contracts.setTargetId(targetId);
 		contracts.setAd(ad);
 		contracts.setAdvertiser(advertiser);
+
+		System.out.println("startDate = " + startDate);
+		System.out.println("endDate = " + endDate);
+		contracts.setStartDate(startDate);
+		contracts.setEndDate(endDate);
 		return contracts;
 	}
 }
